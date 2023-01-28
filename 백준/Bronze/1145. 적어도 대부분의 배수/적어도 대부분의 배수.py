@@ -1,12 +1,20 @@
-import sys
-num_lst = list(map(int, input().split()))
-num_lst.sort()
-max = num_lst[0] * num_lst[1] * num_lst[2]
-for multi_num in range(1, max + 1):
-    count = 0
-    for num in num_lst:
-        if multi_num % num == 0:
-            count += 1
-            if count == 3:
-                print(multi_num)
-                sys.exit(0)
+from itertools import combinations
+import math
+num_lst = (list(map(int,input().split())))
+
+# 5개 중 3개 뽑는 조합
+total_case = []
+data = combinations(num_lst, 3)
+for case in data:
+    total_case.append(case)
+
+# 10가지 케이스의 최소공배수
+total_multi = []
+for case in total_case:
+    a = case[0]
+    b = case[1]
+    c = case[2]
+    total_multi.append(math.lcm(a,b,c))
+
+# 10가지 케이스의 최소공배수 중 최솟값
+print(min(total_multi))
